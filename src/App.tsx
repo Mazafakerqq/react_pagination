@@ -20,12 +20,6 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const totalPages = Math.ceil(total / perPage);
 
-  const handlePageChange = (newPage: number) => {
-    if (newPage !== currentPage && newPage >= 1 && newPage <= total) {
-      onPageChange(newPage);
-    }
-  };
-
   return (
     <ul className="pagination">
       <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
@@ -55,7 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({
               data-cy="pageLink"
               className="page-link"
               href={`#${pageNumber}`}
-              onClick={() => handlePageChange(pageNumber)}
+              onClick={() => onPageChange(pageNumber)}
             >
               {pageNumber}
             </a>
@@ -72,7 +66,7 @@ const Pagination: React.FC<PaginationProps> = ({
           aria-disabled={currentPage === totalPages}
           onClick={() => {
             if (currentPage < totalPages) {
-              handlePageChange(currentPage + 1);
+              onPageChange(currentPage + 1);
             }
           }}
         >
